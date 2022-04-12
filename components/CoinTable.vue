@@ -1,19 +1,21 @@
 <template>
-    <div>
-        <h1>Coin Tables</h1>
-        <div class="root">
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full px-3">
-                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="search-bar" type="text" placeholder="Search for coins">
-                    <p class="text-gray-600 text-xs italic">For example BTC, Shiba...</p>
-                </div>
+    <div class="root">
+        {{ favourites }}
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="w-full px-3">
+                <input v-model="query" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Search for coins">
+                <p class="text-gray-600 text-xs italic">For example BTC, Shiba...</p>
             </div>
-            <ul>
-                <li v-for="coin in coins" :key="coin.id">
-                    <b>{{ coin.name }}</b> <span class="uppercase">{{ coin.symbol }}</span> {{ coin.current_price }}
-                </li>
-            </ul>
         </div>
+        <div class="tabs">
+            <button @click="tabChange('all')">All</button><button @click="tabChange('favourites')">Favourites</button> 
+        </div>
+        <ul>
+            <li v-for="coin in filteredSearch" :key="coin.id" @click="toggleFavourite(coin)">
+                <b>{{ coin.name }}</b> <span class="uppercase">{{ coin.symbol }}</span> {{ coin.current_price }}
+            </li>
+        </ul>
+        <p v-if="filteredSearch.length === 0" class="empty">No items found 🔎</p>
     </div>
 </template>
 
@@ -25,7 +27,15 @@ export default {
     data() {
         return {
             coins: [],
+            query: "",
+            favourites: []
         };
+    },
+    computed: {
+        filteredSearch(){
+            // filter search in name and id
+            return this.coins.filter(coin => coin.name.toLowerCase().includes(this.query.toLowerCase()) || coin.symbol.toLowerCase().includes(this.query.toLowerCase()))
+        }
     },
     async mounted(){
         try {
@@ -34,12 +44,30 @@ export default {
             this.coins = await axios.get(COINGECKO_API).then((response) => {
                 return response.data
             });
-            return {} // ?
+            return { } // ?
         } catch (error) {
             return { error }
         }
-
-    }
+    },    
+    methods: {
+        tabChange(tab){
+            if(tab === 'all'){
+                console.log(`tabChange`, tab);
+            }
+            if(tab === 'favourites'){
+                // hacky !!!
+                this.query = this.favourites[0];
+                console.log(this.filteredSearch);
+            }
+        },
+        toggleFavourite(item){
+            // TODO: remove items (need icon svg probably)
+            if (!this.favourites.includes(item.symbol)) {
+                this.favourites.push(item.symbol);
+            }
+            console.log(`toggle favourite`, item);
+        }
+    },
 }
 </script>
 
@@ -56,6 +84,9 @@ export default {
     .root .empty {
         text-align: center;
 		font-size: 1em;
+    }
+    .empty {
+        padding-top: 7%;
     }
 	ul {
 		list-style:  none;
@@ -75,5 +106,9 @@ export default {
 	}
     li:hover {
         background-color: yellow;
+    }
+    .tabs button {
+        padding: 4px;
+        font-size: 12px;
     }
 </style>

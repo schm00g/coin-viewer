@@ -1,12 +1,11 @@
 <template>
   <div>
     <CoinTable />
-    {{ $store.state.title }}
-    <button @click="increment"> Increment Me! {{ $store.state.counter }}</button>
   </div>
 </template>
 
 <script>
+// TODO: rework state/store
 export default {
   name: 'IndexPage',
   methods: {
