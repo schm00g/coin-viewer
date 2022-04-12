@@ -8,11 +8,11 @@
             </div>
         </div>
         <div class="tabs">
-            <button @click="tabChange('all')">All</button><button @click="tabChange('favourites')">Favourites</button> 
+            <button @click="tabChange('all')">All</button><button @click="tabChange('favourites')">Favourites ({{favourites.length}})</button> 
         </div>
         <ul>
             <li v-for="coin in filteredSearch" :key="coin.id" @click="toggleFavourite(coin)">
-                <b>{{ coin.name }}</b> <span class="uppercase">{{ coin.symbol }}</span> {{ coin.current_price }}
+                <b>{{ coin.name }}</b> <span class="uppercase">{{ coin.symbol }}</span> {{ coin.current_price }} <span v-if="favourites.includes(coin.symbol)">⭐</span>
             </li>
         </ul>
         <p v-if="filteredSearch.length === 0" class="empty">No items found 🔎</p>
@@ -52,20 +52,21 @@ export default {
     methods: {
         tabChange(tab){
             if(tab === 'all'){
+                // TODO: return t full list of tokens
+                location.reload(); 
                 console.log(`tabChange`, tab);
             }
             if(tab === 'favourites'){
-                // hacky !!!
-                this.query = this.favourites[0];
-                console.log(this.filteredSearch);
+                // TODO: only display favourites
+                this.coins = this.coins.filter(item => this.favourites.includes(item.symbol));
             }
         },
         toggleFavourite(item){
-            // TODO: remove items (need icon svg probably)
-            if (!this.favourites.includes(item.symbol)) {
-                this.favourites.push(item.symbol);
-            }
-            console.log(`toggle favourite`, item);
+            return (
+                    this.favourites.includes(item.symbol) ?
+                    this.favourites.splice(this.favourites.indexOf(item.symbol), 1) : 
+                    this.favourites.push(item.symbol)
+                );
         }
     },
 }
