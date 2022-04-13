@@ -8,11 +8,11 @@
         </div>
         <b-field grouped group-multiline>
             <b-button
-                label="Clear Favourites"
+                label="Clear favorites"
                 type="is-danger"
                 icon-left="close"
                 class="field"
-                @click="favouritedRows = []" />
+                @click="favoritedRows = []" />
 
         </b-field>
 
@@ -20,7 +20,7 @@
             <b-tab-item label="All Coins">
                 <b-table
                     :data="filteredSearch"
-                    :checked-rows.sync="favouritedRows"
+                    :checked-rows.sync="favoritedRows"
                     :is-row-checkable="(row) => row.id !== 3 && row.id !== 4"
                     checkable
                     hoverable
@@ -51,16 +51,16 @@
                     </b-table-column>
 
                     <template #bottom-left>
-                        <b>Favourites</b>: {{ favouritedRows.length }}
+                        <b>Favorites</b>: {{ favoritedRows.length }}
                     </template>
                 </b-table>
             </b-tab-item>
 
-            <b-tab-item label="Favourites">
+            <b-tab-item label="Favorites">
                 <template #header>
-                    <span> Favourites <b-tag rounded> {{ favouritedRows.length }} </b-tag> </span>
+                    <span> Favorites <b-tag rounded> {{ favoritedRows.length }} </b-tag> </span>
                 </template>
-                <pre>{{ favouritedRows }}</pre>
+                <pre>{{ favoritedRows }}</pre>
             </b-tab-item>
         </b-tabs>
     </section>
@@ -74,7 +74,7 @@
                 data: [],
                 query: "",
                 checkboxPosition: 'left',
-                favouritedRows: []
+                favoritedRows: []
             }
         },
         computed: {
