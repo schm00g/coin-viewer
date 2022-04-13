@@ -67,14 +67,14 @@
 </template>
 
 <script>
-    import data from './coindata.json';
+    import axios from 'axios';
     export default {
         data() {
             return {
-                data,
+                data: [],
                 query: "",
                 checkboxPosition: 'left',
-                favouritedRows: [data[0], data[1]]
+                favouritedRows: []
             }
         },
         computed: {
@@ -82,6 +82,16 @@
                 return this.data.filter(coin => coin.name.toLowerCase().includes(this.query.toLowerCase()) || coin.symbol.toLowerCase().includes(this.query.toLowerCase()))
             }
         },
+        async created(){
+            try {
+                const COINGECKO_URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
+                await axios.get(COINGECKO_URL).then(response => {
+                    this.data = response.data;
+                });
+            } catch (error) {
+                console.error(error)
+            }
+        }
     }
 </script>
 
