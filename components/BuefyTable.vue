@@ -3,7 +3,7 @@
         <div class="flex flex-wrap -mx-3 mb-6">
             <div class="w-full px-3">
                 <input v-model="query" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Search for coins">
-                <p class="text-gray-600 text-xs italic">For example BTC, Shiba...</p>
+                <p class="text-gray-600 text-xs italic is-pulled-right">For example BTC, Doge...</p>
             </div>
         </div>
         <b-field grouped group-multiline>
@@ -25,7 +25,8 @@
                     :is-row-checkable="(row) => row.id !== 3 && row.id !== 4"
                     checkable
                     hoverable
-                    :checkbox-position="checkboxPosition">
+                    :checkbox-position="checkboxPosition"
+                    >
 
                     <b-table-column v-slot="props" field="name" label="Name" width="40" sortable  numeric>
                         <span>{{ props.row.name }}  <span class="ticker">{{ props.row.symbol }}</span></span>
@@ -68,32 +69,50 @@
 </template>
 
 <script>
-    import axios from 'axios';
-    export default {
-        data() {
-            return {
-                data: [],
-                query: "",
-                checkboxPosition: 'left',
-                favoritedRows: []
-            }
-        },
-        computed: {
-            filteredSearch(){
-                return this.data.filter(coin => coin.name.toLowerCase().includes(this.query.toLowerCase()) || coin.symbol.toLowerCase().includes(this.query.toLowerCase()))
-            }
-        },
-        async created(){
-            try {
-                const COINGECKO_URL = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false";
-                await axios.get(COINGECKO_URL).then(response => {
-                    this.data = response.data;
-                });
-            } catch (error) {
-                console.error(error)
-            }
+import { mapActions } from 'vuex'; 
+import { GET_COIN_DATA, GET_FAVORITES } from '../store/actions.types';
+
+export default {
+    data() {
+        return {
+            query: "",
+            newCoin: {},
+            checkboxPosition: 'left',
+            favoritedRows: []
         }
+    },
+    computed: {
+        coins(){
+            return this.$store.state.coins;
+        },
+        filteredSearch(){
+            return this.coins.filter(coin => coin.name.toLowerCase().includes(this.query.toLowerCase()) || coin.symbol.toLowerCase().includes(this.query.toLowerCase()))
+        }
+    },
+    watch: {
+        favoritedRows(value){
+            this.getFavorites(value)
+        }
+    },
+    created(){
+        this.getCoinData();
+    },
+    methods: {
+        ...mapActions({
+            getCoinData: GET_COIN_DATA,
+            getFavorites: GET_FAVORITES,
+        }),
+        // addToFavorites(){
+        //     if(this.newCoin){
+        //         this.$store.commit('ADD_FAVORITE', this.newCoin);
+        //         this.newCoin = '';
+        //     }
+        // },
+        // yolo(row){
+        //     console.log(`fghjk`, JSON.stringify(row))
+        // }
     }
+}
 </script>
 
 <style scoped>
