@@ -8,8 +8,9 @@
         </div>
         <b-field grouped group-multiline>
             <b-button
+                v-show="favoritedRows.length >= 1"
                 label="Clear favorites"
-                type="is-danger"
+                type="is-danger is-light"
                 icon-left="close"
                 class="field"
                 @click="favoritedRows = []" />
@@ -27,7 +28,7 @@
                     :checkbox-position="checkboxPosition">
 
                     <b-table-column v-slot="props" field="name" label="Name" width="40" sortable  numeric>
-                        {{ props.row.name }}
+                        <span>{{ props.row.name }}  <span class="ticker">{{ props.row.symbol }}</span></span>
                     </b-table-column>
 
                     <b-table-column v-slot="props" field="current_price" label="Current Price" width="40" sortable  numeric>
@@ -51,7 +52,7 @@
                     </b-table-column>
 
                     <template #bottom-left>
-                        <b>Favorites</b>: {{ favoritedRows.length }}
+                        <p v-if="filteredSearch.length === 0" class="empty">No matching items found 🔎</p>
                     </template>
                 </b-table>
             </b-tab-item>
@@ -98,5 +99,9 @@
 <style scoped>
 #coin-table {
     padding: 3%;
+}
+.ticker {
+    text-transform: uppercase;
+    color: rgb(207, 207, 207);
 }
 </style>
