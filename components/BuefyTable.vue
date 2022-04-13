@@ -74,36 +74,7 @@
                 data,
                 query: "",
                 checkboxPosition: 'left',
-                favouritedRows: [data[0], data[1]],
-                columns: [
-                    {
-                        field: 'name',
-                        label: 'Name',
-                        width: '40',
-                        numeric: true
-                    },
-                    {
-                        field: 'current_price',
-                        label: 'Price',
-                    },
-                    {
-                        field: 'price_change_percentage_24h',
-                        label: '24h%',
-                    },
-                    {
-                        field: 'market_cap',
-                        label: 'Market Cap',
-                        centered: true
-                    },
-                    {
-                        field: 'total_volume',
-                        label: 'Volume(24h)',
-                    },
-                    {
-                        field: 'circulating_supply',
-                        label: 'Circulating Supply',
-                    }
-                ]
+                favouritedRows: [data[0], data[1]]
             }
         },
         computed: {
