@@ -1,6 +1,7 @@
 <template>
   <div>
-    <CoinTable />
+    <!-- <CoinTable /> -->
+    <BuefyTable />
   </div>
 </template>
 
