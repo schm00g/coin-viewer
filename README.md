@@ -9,7 +9,7 @@ $ npm install
 # serve with hot reload at localhost:3000
 $ npm run dev
 
-# build for production and launch server
+# build for production and launch server (to use as installable PWA for offline use)
 $ npm run build
 $ npm run start
 
