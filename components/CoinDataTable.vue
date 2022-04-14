@@ -94,15 +94,6 @@ export default {
     created(){
         this.getCoinData();
     },
-    // mounted(){
-    //     if (localStorage.getItem('favorites')) {
-    //         try {
-    //             this.favoritedRows = JSON.parse(localStorage.getItem('favorites'));
-    //         } catch(e) {
-    //             localStorage.removeItem('favorites');
-    //         }
-    //     }
-    // },
     methods: {
         ...mapActions({
             getCoinData: GET_COIN_DATA,

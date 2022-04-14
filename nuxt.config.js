@@ -69,5 +69,13 @@ export default {
 
   generate: {
     dir: 'dist'
+  },
+
+  // toggle for production deploy
+  vue: {
+    config: {
+      productionTip: false,
+      devtools: true
+    }
   }
 }
