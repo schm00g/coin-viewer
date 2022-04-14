@@ -53,7 +53,13 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    meta: {
+      title: 'Coin Viewer PWA',
+      author: 'Me',
+    },
     manifest: {
+      name: 'Coin Viewer PWA',
+      short_name: 'Coin Viewer',
       lang: 'en',
     },
   },

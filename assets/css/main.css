@@ -6,7 +6,12 @@
     /* background-color: black; */
     /* color: white; */
 }
-
 body {
     margin-top: 2%;
+}
+::selection {
+    background: #b7ffe86f; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+    background: #b7ffe86f; /* Gecko Browsers */
 }
