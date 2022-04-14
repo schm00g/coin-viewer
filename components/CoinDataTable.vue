@@ -8,7 +8,7 @@
         </div>
         <b-field grouped group-multiline>
             <b-button
-                v-show="favoritedRows.length >= 1"
+                :disabled="favoritedRows.length === 0"
                 label="Clear favorites"
                 type="is-danger is-light"
                 icon-left="close"
@@ -122,5 +122,8 @@ export default {
 .ticker {
     text-transform: uppercase;
     color: rgb(207, 207, 207);
+}
+.field {
+    margin-bottom: 2%;
 }
 </style>
