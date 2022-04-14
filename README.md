@@ -38,3 +38,7 @@ Configuring the app to be a PWA allows user to download a native version of the 
 offline use.
 
 See [demo](https://coin-viewer-7munj60j9-schm00g.vercel.app/) hosted on Vercel.
+
+## Basic Exercises
+
+Added a [folder](https://github.com/schm00g/coin-viewer/tree/master/basic) in this repo with my answers.
