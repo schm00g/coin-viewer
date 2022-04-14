@@ -20,10 +20,10 @@
             <b-tab-item label="All Coins">
                 <b-table
                     :data="filteredSearch"
-                    :checked-rows.sync="favoritedRows"
-                    :is-row-checkable="(row) => row.id !== 1 && row.id !== 2"
-                    checkable
                     hoverable
+                    checkable
+                    :checked-rows.sync="favoritedRows"
+                    :custom-is-checked="(a, b) => { return a.id === b.id }"
                     :checkbox-position="checkboxPosition"
                     @check="modifyFavorites"
                     >
