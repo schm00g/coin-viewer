@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { GET_COIN_DATA, GET_FAVORITES } from "./actions.types";
+import { GET_COIN_DATA, UPDATE_FAVORITES } from "./actions.types";
 
 import { SET_COINS, SET_FAVORITES } from "./mutations.types";
 
@@ -9,9 +9,7 @@ const state = () => ({
     coins: []
 })
 
-const getters = {
-
-}
+const getters = {}
 
 const actions = {
     async [GET_COIN_DATA]({commit}, _){
@@ -24,7 +22,7 @@ const actions = {
             throw new Error(message);
         }
     },
-    [GET_FAVORITES]({commit}, payload){
+    [UPDATE_FAVORITES]({commit}, payload){
         commit(SET_FAVORITES, payload);
     }
 }
@@ -32,9 +30,11 @@ const actions = {
 const mutations = {
     [SET_COINS](state, payload){
         state.coins = payload;
+        localStorage.setItem("coins", JSON.stringify(payload))
     },
     [SET_FAVORITES](state, payload){
         state.favorites = payload;
+        localStorage.setItem("favorites", JSON.stringify(payload))
     }
 }
 

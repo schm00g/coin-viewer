@@ -13,19 +13,19 @@
                 type="is-danger is-light"
                 icon-left="close"
                 class="field"
-                @click="favoritedRows = []" />
-
-        </b-field>
+                @click="clearFavorites" />
+        </b-field>  
 
         <b-tabs>
             <b-tab-item label="All Coins">
                 <b-table
                     :data="filteredSearch"
                     :checked-rows.sync="favoritedRows"
-                    :is-row-checkable="(row) => row.id !== 3 && row.id !== 4"
+                    :is-row-checkable="(row) => row.id !== 1 && row.id !== 2"
                     checkable
                     hoverable
                     :checkbox-position="checkboxPosition"
+                    @check="modifyFavorites"
                     >
 
                     <b-table-column v-slot="props" field="name" label="Name" width="40" sortable  numeric>
@@ -33,7 +33,7 @@
                     </b-table-column>
 
                     <b-table-column v-slot="props" field="current_price" label="Current Price" width="40" sortable  numeric>
-                        {{ props.row.current_price }}
+                        ${{ formatNumber(props.row.current_price) }}
                     </b-table-column>
 
                     <b-table-column v-slot="props" field="price_change_percentage_24h" label="24h%" width="40" sortable  numeric>
@@ -41,15 +41,15 @@
                     </b-table-column>
 
                     <b-table-column v-slot="props" field="market_cap" label="Market Cap" width="40" sortable  numeric>
-                        {{ props.row.market_cap }}
+                        ${{ formatNumber(props.row.market_cap) }}
                     </b-table-column>
 
                     <b-table-column v-slot="props" field="total_volume" label="Volume(24h)" width="40" sortable  numeric>
-                        {{ props.row.total_volume }}
+                        ${{ formatNumber(props.row.total_volume) }}
                     </b-table-column>
 
                     <b-table-column v-slot="props" field="circulating_supply" label="Circulating Supply" width="40" sortable  numeric>
-                        {{ props.row.circulating_supply }}
+                        {{ formatNumber(props.row.circulating_supply) }}<span class="ticker"> {{ props.row.symbol }} </span></span>
                     </b-table-column>
 
                     <template #bottom-left>
@@ -70,47 +70,56 @@
 
 <script>
 import { mapActions } from 'vuex'; 
-import { GET_COIN_DATA, GET_FAVORITES } from '../store/actions.types';
+import { GET_COIN_DATA, UPDATE_FAVORITES } from '../store/actions.types';
 
 export default {
+    name: "CoinDataTable",
     data() {
         return {
             query: "",
-            newCoin: {},
             checkboxPosition: 'left',
-            favoritedRows: []
+            favoritedRows: JSON.parse(localStorage.getItem('favorites')) 
+                ? JSON.parse(localStorage.getItem('favorites'))
+                : []
         }
     },
     computed: {
         coins(){
-            return this.$store.state.coins;
+            return this.$store.state.coins || JSON.parse(localStorage.getItem('coins'));
         },
         filteredSearch(){
             return this.coins.filter(coin => coin.name.toLowerCase().includes(this.query.toLowerCase()) || coin.symbol.toLowerCase().includes(this.query.toLowerCase()))
         }
     },
-    watch: {
-        favoritedRows(value){
-            this.getFavorites(value)
-        }
-    },
     created(){
         this.getCoinData();
     },
+    // mounted(){
+    //     if (localStorage.getItem('favorites')) {
+    //         try {
+    //             this.favoritedRows = JSON.parse(localStorage.getItem('favorites'));
+    //         } catch(e) {
+    //             localStorage.removeItem('favorites');
+    //         }
+    //     }
+    // },
     methods: {
         ...mapActions({
             getCoinData: GET_COIN_DATA,
-            getFavorites: GET_FAVORITES,
+            updateFavorites: UPDATE_FAVORITES,
         }),
-        // addToFavorites(){
-        //     if(this.newCoin){
-        //         this.$store.commit('ADD_FAVORITE', this.newCoin);
-        //         this.newCoin = '';
-        //     }
-        // },
-        // yolo(row){
-        //     console.log(`fghjk`, JSON.stringify(row))
-        // }
+        clearFavorites(){
+            this.favoritedRows = [];
+            this.updateFavorites(this.favoritedRows);
+            localStorage.removeItem('favorites');
+        },
+        modifyFavorites(value){
+            this.favoritedRows = value;
+            this.updateFavorites(value);
+        },
+        formatNumber(number){
+            return number.toLocaleString('en-US');
+        }
     }
 }
 </script>

@@ -1,18 +1,11 @@
 <template>
   <div>
-    <!-- <CoinTable /> -->
-    <BuefyTable />
+    <CoinDataTable />
   </div>
 </template>
 
 <script>
-// TODO: rework state/store
 export default {
-  name: 'IndexPage',
-  methods: {
-    increment(state){
-        this.$store.commit('increment');
-    }
-  }
+  name: 'IndexPage'
 }
 </script>
