@@ -32,16 +32,15 @@ Nuxt.js framework was used to build on top of Vue - it is ideal for iterating on
 * SPA (faster loading times, caching capabilities, only relevant code is updated, responsive for better UX)
 * Node.js hosting
 
-For state management Vuex (flux pattern) is used. Vuex is typically suited to a much larger application For smaller application props and events will suffice. Nuxt.js has Vuex baked in. State management patterns mean that there is a single source of truth - keeping mutations predictable.
+For state management Vuex (flux pattern) is used. For smaller application props and events can suffice but Vuex was chosen here as it is industry standard and Nuxt.js has Vuex baked in. State management patterns mean that there is a single source of truth - keeping mutations to the state predictable.
 
 For the UI components the lightweight, open-source, well supported, and documented Buefy (built on top of Bulma) was used. 
 
-Configuring the app to be a PWA allows user to download a native version of the client for
-offline use.
+Configuring the app to be a PWA allows the user to download what feels like a native desktop application - allowing for offline use.
 
-Chose to work with vue 2 as some libraries have not yet caught up with vue 3.
+Chose to work with Vue 2 as some libraries have not yet caught up with Vue 3.
 
-Vue dev tools essential for iterating and debugging.
+Vue.js  dev tools essential for iterating and debugging.
 
 App has been hosted on Vercel for ease of accessibility.
 
