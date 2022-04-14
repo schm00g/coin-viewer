@@ -1,5 +1,7 @@
 # coin-viewer
 
+See [demo](https://coin-viewer-7munj60j9-schm00g.vercel.app/) hosted on Vercel.
+
 ## Build Setup
 
 ```bash
@@ -19,25 +21,28 @@ $ npm run generate
 
 ## High-level description
 
-This application fetches the top 100 coins using the CoinGecko API. The end-user can then search for tokens, save favorites and sort table data. Nuxt.js framework was used to build on top of Vue - it is ideal for iterating on SPAs. It allows quick scaffolding of projects with easy configuration. My initial choices included:
+This application fetches the top 100 coins (by market cap) using the CoinGecko API. The end-user can then filter tokens using string based search, save favorites and sort table data. 
+
+Nuxt.js framework was used to build on top of Vue - it is ideal for iterating on SPAs. It comes with in-built routing, directory structure and many plugins plus a developer community. It allows quick scaffolding of projects with easy configuration. Some initial choices included:
 * JavaScript
 * Tailwind CSS (inline utility css framework)
-* Axios (interface for HTTP requests, improved readability over fetch())
-* PWA (for offline use)
-* ESLint (code style guidelines - consistency)
-* Jest (unit tests)
-* SPA / server side rendering
+* Axios (interface for HTTP requests, improved readability over standard fetch())
+* PWA (for offline use) - PWA module configuration in `nuxt.config.js`
+* ESLint & Prettier (code style guidelines - consistency)
+* SPA (faster loading times, caching capabilities, only relevant code is updated, responsive for better UX)
 * Node.js hosting
 
 For state management Vuex (flux pattern) is used. Vuex is probably more justified in a larger
-application. It allows for actions and mutations on our program state. For smaller application props and events will suffice. Nuxt.js has Vuex baked in.
+application. It allows for actions and mutations on our program state. For smaller application props and events will suffice. Nuxt.js has Vuex baked in. State management patterns mean that there is a single source of truth - keeping mutations predictable.
 
-For the UI components the lightweight, well supported and documented Buefy (built on top of Bulma) was used. 
+For the UI components the lightweight, open-source, well supported, and documented Buefy (built on top of Bulma) was used. 
 
 Configuring the app to be a PWA allows user to download a native version of the client for
 offline use.
 
-See [demo](https://coin-viewer-7munj60j9-schm00g.vercel.app/) hosted on Vercel.
+Chose to work with vue 2 as some libraries have not yet caught up with vue 3.
+
+Vue dev tools essential for iterating and debugging.
 
 ## Basic Exercises
 

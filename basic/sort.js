@@ -26,3 +26,8 @@ const millisDuration = Date.now() - start; // APPROXIMATION
 */ 
 
 console.log(`Days: `, (millisDuration * 10000000000) / (1000 * 60 * 24 * 365));
+
+/* 
+    for more accuracy in timing console.time("sort") | console.endTime("sort")
+    could be used
+*/
