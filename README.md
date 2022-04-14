@@ -21,9 +21,9 @@ $ npm run generate
 
 ## High-level description
 
-This application fetches the top 100 coins (by market cap) using the CoinGecko API. The end-user can then filter tokens using string based search, save favorites and sort table data. 
+This application fetches the top 100 coins by market cap using the CoinGecko API. The end-user can then filter tokens using string based search, save favorites and sort table data. 
 
-Nuxt.js framework was used to build on top of Vue - it is ideal for iterating on SPAs. It comes with in-built routing, directory structure and many plugins plus a developer community. It allows quick scaffolding of projects with easy configuration. Some initial choices included:
+Nuxt.js framework was used to build on top of Vue - it is ideal for iterating on single page applications (SPAs). It comes with in-built routing, directory structure and many plugins plus a developer community. It quickly scaffolds projects with configuration. Some initial choices included:
 * JavaScript
 * Tailwind CSS (inline utility css framework)
 * Axios (interface for HTTP requests, improved readability over standard fetch())
@@ -32,8 +32,7 @@ Nuxt.js framework was used to build on top of Vue - it is ideal for iterating on
 * SPA (faster loading times, caching capabilities, only relevant code is updated, responsive for better UX)
 * Node.js hosting
 
-For state management Vuex (flux pattern) is used. Vuex is probably more justified in a larger
-application. It allows for actions and mutations on our program state. For smaller application props and events will suffice. Nuxt.js has Vuex baked in. State management patterns mean that there is a single source of truth - keeping mutations predictable.
+For state management Vuex (flux pattern) is used. Vuex is typically suited to a much larger application For smaller application props and events will suffice. Nuxt.js has Vuex baked in. State management patterns mean that there is a single source of truth - keeping mutations predictable.
 
 For the UI components the lightweight, open-source, well supported, and documented Buefy (built on top of Bulma) was used. 
 
@@ -43,6 +42,8 @@ offline use.
 Chose to work with vue 2 as some libraries have not yet caught up with vue 3.
 
 Vue dev tools essential for iterating and debugging.
+
+App has been hosted on Vercel for ease of accessibility.
 
 ## Basic Exercises
 
