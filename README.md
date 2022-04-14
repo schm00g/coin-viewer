@@ -37,4 +37,4 @@ For the UI components the lightweight, well supported and documented Buefy (buil
 Configuring the app to be a PWA allows user to download a native version of the client for
 offline use.
 
-See [demo](https://coincoincoin.vercel.app/) hosted on Vercel.
+See [demo](https://coin-viewer-7munj60j9-schm00g.vercel.app/) hosted on Vercel.
