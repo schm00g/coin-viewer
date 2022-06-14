@@ -43,7 +43,3 @@ Chose to work with Vue 2 as some libraries have not yet caught up with Vue 3.
 Vue.js  dev tools essential for iterating and debugging.
 
 App has been hosted on Vercel for ease of accessibility.
-
-## Basic Exercises
-
-Added a [folder](https://github.com/schm00g/coin-viewer/tree/master/basic) in this repo with my answers.
